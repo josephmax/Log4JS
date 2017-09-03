@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Logger from './util/Logger'
+
+Vue.prototype.$logger = new Logger('other')
 
 Vue.config.productionTip = false
 
