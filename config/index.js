@@ -4,7 +4,7 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    logLevel: 'WARN',
+    logLv: 'WARN',
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -24,7 +24,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    logLevel: 'ALL',
+    logLv: 'ALL',
     port: 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
