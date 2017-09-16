@@ -21,13 +21,14 @@
 </template>
 
 <script>
+import Logger from '../util/Logger'
 export default {
   name: 'hello',
   mounted () {
-    this.$logger.error('test error')
-    this.$logger.warn('test warn')
-    this.$logger.info('test info')
-    this.$logger.debug('test debug')
+    Logger.error('error')
+    Logger.warn('warn')
+    Logger.info('info')
+    Logger.debug('debug')
   },
   data () {
     return {

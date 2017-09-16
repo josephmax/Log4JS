@@ -1,7 +1,8 @@
 /**
  * Created by Sean Wong at 2017/09/03.
  */
-const type = {
+
+const TYPE = {
   OFF: 'OFF',
   ERROR: 'ERROR',
   WARN: 'WARN',
@@ -10,35 +11,57 @@ const type = {
   ALL: 'ALL'
 }
 const LEVEL = {
-  [type.OFF]: 0,
-  [type.ERROR]: 1,
-  [type.WARN]: 2,
-  [type.INFO]: 3,
-  [type.DEBUG]: 4,
-  [type.ALL]: 5
+  [TYPE.OFF]: 0,
+  [TYPE.ERROR]: 1,
+  [TYPE.WARN]: 2,
+  [TYPE.INFO]: 3,
+  [TYPE.DEBUG]: 4,
+  [TYPE.ALL]: 5
+}
+
+let level
+
+const setLevel = lvNm => {
+  level = LEVEL[lvNm]
+  console.log(`Log4JS Level: ${lvNm}`)
 }
 
 class Log4JS {
-  constructor (lv = type.WARN) {
-    lv = type[lv.toUpperCase()] === undefined ? type.WARN : type[lv.toUpperCase()]
-    this.level = LEVEL[lv]
-    console.log(`this.level ${lv}:${this.level}`)
+  constructor (lvNm = 'WARN') {
+    // 初始化日志输出级别
+    lvNm = typeof lvNm === 'string' ? (TYPE[lvNm.toUpperCase()] || TYPE.WARN) : TYPE.WARN
+    setLevel(lvNm)
   }
+
+  /**
+   * 错误级别日志
+   */
   error () {
-    if (LEVEL['ERROR'] > this.level) return
-    console.error(...arguments)
+    if (LEVEL[TYPE.ERROR] > level) return
+    console.error(`[${TYPE.ERROR}]`, ...arguments)
   }
+  /**
+   * 警告级别日志
+   */
   warn () {
-    if (LEVEL['WARN'] > this.level) return
-    console.warn(...arguments)
+    if (LEVEL[TYPE.WARN] > level) return
+    console.warn(`[${TYPE.WARN}]`, ...arguments)
   }
+
+  /**
+   * 提示级别日志
+   */
   info () {
-    if (LEVEL['INFO'] > this.level) return
-    console.info(...arguments)
+    if (LEVEL[TYPE.INFO] > level) return
+    console.info(`[${TYPE.INFO}]`, ...arguments)
   }
+
+  /**
+   * 调试级别日志
+   */
   debug () {
-    if (LEVEL['DEBUG'] > this.level) return
-    console.log(...arguments)
+    if (LEVEL[TYPE.DEBUG] > level) return
+    console.log(`[${TYPE.DEBUG}]`, ...arguments)
   }
 }
 
