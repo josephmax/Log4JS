@@ -19,31 +19,24 @@ const LEVEL = {
   [TYPE.ALL]: 5
 }
 
-let level
-
-const setLevel = lvNm => {
-  level = LEVEL[lvNm]
+function Log4JS (lvNm = TYPE.WARN) {
+  // format level name
+  lvNm = typeof lvNm === 'string' ? (TYPE[lvNm.toUpperCase()] || TYPE.WARN) : TYPE.WARN
+  // set level
+  let level = LEVEL[lvNm]
   console.log(`Log4JS Level: ${lvNm}`)
-}
-
-class Log4JS {
-  constructor (lvNm = 'WARN') {
-    // 初始化日志输出级别
-    lvNm = typeof lvNm === 'string' ? (TYPE[lvNm.toUpperCase()] || TYPE.WARN) : TYPE.WARN
-    setLevel(lvNm)
-  }
 
   /**
    * 错误级别日志
    */
-  error () {
+  Log4JS.prototype.error = function () {
     if (LEVEL[TYPE.ERROR] > level) return
     console.error(`[${TYPE.ERROR}]`, ...arguments)
   }
   /**
    * 警告级别日志
    */
-  warn () {
+  Log4JS.prototype.warn = function () {
     if (LEVEL[TYPE.WARN] > level) return
     console.warn(`[${TYPE.WARN}]`, ...arguments)
   }
@@ -51,7 +44,7 @@ class Log4JS {
   /**
    * 提示级别日志
    */
-  info () {
+  Log4JS.prototype.info = function () {
     if (LEVEL[TYPE.INFO] > level) return
     console.info(`[${TYPE.INFO}]`, ...arguments)
   }
@@ -59,7 +52,7 @@ class Log4JS {
   /**
    * 调试级别日志
    */
-  debug () {
+  Log4JS.prototype.debug = function () {
     if (LEVEL[TYPE.DEBUG] > level) return
     console.log(`[${TYPE.DEBUG}]`, ...arguments)
   }
