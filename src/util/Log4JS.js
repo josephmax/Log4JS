@@ -21,7 +21,7 @@ const LEVEL = {
 
 function Log4JS (lvNm = TYPE.WARN) {
   // format level name
-  lvNm = typeof lvNm === 'string' ? (TYPE[lvNm.toUpperCase()] || TYPE.WARN) : TYPE.WARN
+  lvNm = TYPE[String(lvNm).toUpperCase()] || TYPE.WARN
   // set level
   let level = LEVEL[lvNm]
   console.log(`Log4JS Level: ${lvNm}`)
