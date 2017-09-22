@@ -29,6 +29,11 @@ export default {
     Logger.warn('warn')
     Logger.info('info')
     Logger.debug('debug')
+
+    console.error('error')
+    console.warn('warn')
+    console.info('info')
+    console.log('debug')
   },
   data () {
     return {
